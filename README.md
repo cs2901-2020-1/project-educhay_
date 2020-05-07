@@ -3,7 +3,7 @@
 |  **#** | **Código** | **Apellidos, Nombre** | **% Trabajo** |
 | :---: | :---: | :---: | :---: |
 |  1 | 201710392  | Yurivilca, Miguel |  |
-|  2 |  |  |  |
+|  2 | 20150239 |De los Heros, Fernando  |  |
 |  3 |  |  |  |
 |  4 |  |  |  |
 |  5 |  |  |  |
