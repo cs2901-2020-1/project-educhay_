@@ -16,7 +16,7 @@
 2. [FR001] Como alumno y profesor puedo comentar en los vídeos de la plataforma.
 3. [FR002] Como profesor y administrador puedo subir videos a la plataforma.
 4. [FR003] Como usuario puedo visualizar los vídeos ordenados por calificación.
-5. [FR004] Como administrador puedo borrar comentarios de los alumnos. 
+5. [FR004] Como usuario puedo borrar comentarios. 
 6. [FR005] Como usuario tengo acceso al historial de vídeos visualizados previamente.
 7. [FR006] Como administrador y alumno puedo calificar los videos que se encuentren dentro de la plataforma.
 8. [FR007] Como administrador recibo notificaciones sobre los vídeos que se suban a la plataforma.
