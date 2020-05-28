@@ -29,9 +29,9 @@
 #### Requerimientos No Funcionales (5)
 1. [NFR001] Como alumno puedo almacenar los vídeos sin una demanda alta de espacio en memoria.
 2. [NFR002] Como usuario tengo mi contraseña encriptada internamente en la plataforma como método de seguridad.
-3. [NFR003] Como alumno deseo poder acceder a la plataforma con un tiempo de espera mínimo.
+3. [NFR003] Como alumno deseo poder acceder a la plataforma con un tiempo de espera mínimo de 5 segundos.
 4. [NFR004] Como profesor deseo que la aplicación tenga un flujo de uso intuitivo y simple.
-5. [NFR005] Como alumno puedo visualizar la aplicación de manera indistinta en web o móvil.
+5. [NFR005] Como usuario puedo visualizar la aplicación de manera indistinta en web o móvil.
 
 ### Resultados de las Técnicas de Recolección de Requerimientos
 1. [Técnica 1](docs/analysis/tecnica1.md) Encuestas
