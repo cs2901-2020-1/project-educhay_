@@ -53,3 +53,9 @@
 
 ### Presentation / Presentación
 1. [Presentación Etapa de Análisis](docs/presentation/presentation.pdf)
+
+### Diagramas - Etapa de Diseño
+1. [Diagrama de Arquitectura](docs/assets/images/arch_diagram.png)
+2. [Diagrama de Componentes](docs/assets/images/comp_diagram.png)
+3. [Diagrama de Clases](docs/assets/images/class_diagram.png)
+4. Diagrama de Secuencias [1](docs/assets/images/seq_diagram1.png)[2](docs/assets/images/seq_diagram2.png)[3](docs/assets/images/seq_diagram3.png)[4](docs/assets/images/seq_diagram4.png)
