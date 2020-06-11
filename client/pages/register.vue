@@ -83,8 +83,12 @@ export default {
   },
   methods: {
     onSubmit() {
+      const url = ''
       this.$v.$touch()
-      alert(JSON.stringify(this.form))
+      this.$axios
+        .$post(url)
+        .then((res) => {})
+        .catch((e) => {})
     }
   }
 }

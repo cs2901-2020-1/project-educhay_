@@ -25,6 +25,7 @@
         <nuxt-link to="/" tag="span" style="cursor: pointer;">
           {{ appTitle }}
         </nuxt-link>
+        <!--        <b-img src="~/assets/logo.png" />-->
       </v-toolbar-title>
       <v-spacer />
       <v-toolbar-items class="hidden-xs-only">

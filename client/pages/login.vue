@@ -36,8 +36,12 @@ export default {
     }
   },
   methods: {
-    onSubmit() {
-      alert(JSON.stringify(this.form))
+    async onSubmit() {
+      const url = ''
+      await this.$axios
+        .$post(url)
+        .then((res) => {})
+        .catch((e) => {})
     }
   }
 }
