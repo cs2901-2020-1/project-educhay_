@@ -2,6 +2,7 @@
   <v-container class="fill-height my-style">
     <v-row align="center" justify="center">
       <v-col class="text-center">
+        <h1 class="m-5">Iniciar sesion</h1>
         <v-form>
           <v-text-field
             v-model="form.email"
