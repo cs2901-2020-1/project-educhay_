@@ -5,12 +5,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class userController {
+public class usersController {
     @Autowired
-    userRepository UserRepo;
+    usersRepository UserRepo;
     @PostMapping("/register")
     public boolean register(@RequestBody String username, String pass){
-        user new_usr = new user(username,pass);
+        users new_usr = new users(username,pass);
         UserRepo.save(new_usr);
         return true;
     }

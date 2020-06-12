@@ -3,20 +3,20 @@ package com.educhay.project.login;
 import javax.persistence.*;
 
 @Entity
-public class user {
+public class users {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    @Column
+    private long id;
+    @Column(name="usuario")
     public String username;
-    @Column
+    @Column(name="pass")
     public String password;
 
-    public user(String username, String password) {
+    public users(String username, String password) {
         this.username = username;
         this.password = password;
     }
-    public user(){};
+    public users(){};
     public boolean valid(String pass) {
         if (pass == password) {
             return true;
