@@ -1,6 +1,9 @@
 <template>
   <div>
     <v-navigation-drawer v-model="sidebar" app>
+      <span>
+        <v-app-bar-nav-icon class="mt-3 ml-5" @click="sidebar = !sidebar" />
+      </span>
       <v-list>
         <v-list-item
           v-for="item in menuItems"
@@ -10,29 +13,26 @@
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
-          <v-list-item-content>
-            {{ item.title }}
-          </v-list-item-content>
+          <v-list-item-content>{{ item.title }}</v-list-item-content>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
     <v-app-bar>
-      <span class="hidden-sm-and-up">
+      <!-- <span class="hidden-sm-and-up"> -->
+      <span>
         <v-app-bar-nav-icon @click="sidebar = !sidebar" />
       </span>
       <v-toolbar-title>
-        <nuxt-link to="/" tag="span" style="cursor: pointer;">
+        <!-- <nuxt-link to="/" tag="span" style="cursor: pointer;">
           {{ appTitle }}
-        </nuxt-link>
-        <!--        <b-img src="~/assets/logo.png" />-->
+        </nuxt-link>-->
+        <b-img src="~/assets/logo.png" height="50" />
       </v-toolbar-title>
       <v-spacer />
       <v-toolbar-items class="hidden-xs-only">
         <v-btn v-for="item in menuItems" :key="item.title" text :to="item.path">
-          <v-icon left dark>
-            {{ item.icon }}
-          </v-icon>
+          <v-icon left dark>{{ item.icon }}</v-icon>
           {{ item.title }}
         </v-btn>
       </v-toolbar-items>
