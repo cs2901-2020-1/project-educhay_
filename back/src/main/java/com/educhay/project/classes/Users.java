@@ -1,9 +1,9 @@
-package com.educhay.project.login;
+package com.educhay.project.classes;
 
 import javax.persistence.*;
 
 @Entity
-public class users {
+public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -12,11 +12,11 @@ public class users {
     @Column(name="pass")
     public String password;
 
-    public users(String username, String password) {
+    public Users(String username, String password) {
         this.username = username;
         this.password = password;
     }
-    public users(){};
+    public Users(){};
     public boolean valid(String pass) {
         if (pass == password) {
             return true;
