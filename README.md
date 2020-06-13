@@ -4,7 +4,7 @@
 | :---: | :---: | :---: | :---: |
 |  1 | 201710392 | Yurivilca, Miguel | 20% |
 |  2 | 201510239 | De los Heros, Fernando | 20% |
-|  3 | 201810253 | Uccelli, Francesco | 20% |
+|  3 | 201810253 | Uccelli, Francesco. | 20% |
 |  4 | 201720065 | Hoyos, Jonathan | 20% |
 |  5 | 201910518 | Jáuregui, Luis | 20% |
 
