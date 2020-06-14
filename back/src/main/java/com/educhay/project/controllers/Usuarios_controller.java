@@ -1,13 +1,13 @@
 package com.educhay.project.controllers;
 import com.educhay.project.classes.Usuario;
-import com.educhay.project.repository.Users_repository;
+import com.educhay.project.repository.Usuarios_repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class usersController {
+public class Usuarios_controller {
     @Autowired
-    Users_repository UserRepo;
+    Usuarios_repository UserRepo;
     @PostMapping("/register")
     public boolean register(@RequestBody String username, String pass){
         Usuario new_usr = new Usuario(username,pass);

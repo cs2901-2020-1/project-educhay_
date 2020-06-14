@@ -1,16 +1,22 @@
 package com.educhay.project.classes;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Column(name="usuario")
     public String username;
-    @Column(name="pass")
     public String password;
+    public String email;
+    @OneToMany
+    public List<Video> vids_vistos;
+    @ElementCollection
+    public List<String> notifs;
+
 
     public Usuario(String username, String password) {
         this.username = username;

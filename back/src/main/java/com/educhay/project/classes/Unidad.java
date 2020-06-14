@@ -1,15 +1,17 @@
 package com.educhay.project.classes;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
+
+@Entity
 public class Unidad {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    ArrayList<Long> videos;
+    @OneToMany
+    List<Video> videos;
     public String nombre, curso , grado;
-    public boolean addVideo(Long id){
+    public boolean addVideo(Video id){
         if (videos.contains(id)){return false;}
         videos.add(id);
         return true;
