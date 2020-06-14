@@ -3,7 +3,7 @@ package com.educhay.project.classes;
 import javax.persistence.*;
 
 @Entity
-public class Users {
+public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -12,11 +12,11 @@ public class Users {
     @Column(name="pass")
     public String password;
 
-    public Users(String username, String password) {
+    public Usuario(String username, String password) {
         this.username = username;
         this.password = password;
     }
-    public Users(){};
+    public Usuario(){};
     public boolean valid(String pass) {
         if (pass == password) {
             return true;
