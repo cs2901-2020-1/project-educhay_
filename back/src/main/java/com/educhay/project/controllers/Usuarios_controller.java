@@ -31,22 +31,18 @@ public class Usuarios_controller {
     @ResponseBody
     public Register_response register(@RequestBody Register_form register_form){
         //String username, String password, String nombre , String apellido, String email
-        logger.error("Entro");
+
         Optional<Usuario> u_email_validacion =UserRepo.findByEmail(register_form.email);
         Optional<Usuario> u_user_validacion = UserRepo.findByUsername(register_form.username);
-        logger.error("Linea 35");
         Optional<Profesor>p_email_validacion = ProfeRepo.findByEmail(register_form.email);
         Optional<Profesor>p_user_validacion = ProfeRepo.findByUsername(register_form.username);
         if (u_email_validacion.isPresent() || u_user_validacion.isPresent() || p_email_validacion.isPresent() || p_user_validacion.isPresent() ){
             Register_response toReturn= new Register_response();
             toReturn.confirmation = false;
-            logger.error("Return 1");
-
-            return toReturn;
         }
         Usuario new_usr = new Usuario(register_form.username,register_form.password,register_form.nombre,register_form.apellido,register_form.email);
         UserRepo.save(new_usr);
-        logger.error("Return 2");
+
 
         return new Register_response();
     }
@@ -55,7 +51,13 @@ public class Usuarios_controller {
     Login_response login_temp(@RequestBody Login_request request){
         Optional<Usuario> u_email_validacion =UserRepo.findByEmail(request.email);
         Optional<Profesor>p_email_validacion = ProfeRepo.findByEmail(request.email);
-        if (u_email_validacion.isPresent() && request.password == u_email_validacion.get().password){
+
+        boolean one = u_email_validacion.isPresent();
+
+        if (one){ String repo_pass =u_email_validacion.get().password;
+            boolean two = (request.password.equals(repo_pass));
+        if ( two){
+            logger.error("Entro");
             Usuario my_user = u_email_validacion.get();
             Login_response to_return =  new Login_response();
             to_return.apellido = my_user.apellido;
@@ -65,7 +67,7 @@ public class Usuarios_controller {
             to_return.username = my_user.username;
             return to_return;
 
-        }
+        }}
         if (p_email_validacion.isPresent() && request.password == p_email_validacion.get().password){
             Profesor my_user = p_email_validacion.get();
             Login_response to_return =  new Login_response();
