@@ -22,11 +22,13 @@ public class Usuarios_controller {
     @Autowired
     Profesor_repository ProfeRepo;
     Logger logger = LoggerFactory.getLogger(Usuarios_controller.class);
+    @CrossOrigin
     @GetMapping("/")
     public String holaMundo(){
         String to_return = "Hola Mundo!";
         return to_return;
     }
+    @CrossOrigin
     @PostMapping("/register")
     @ResponseBody
     public Register_response register(@RequestBody Register_form register_form){
@@ -46,6 +48,7 @@ public class Usuarios_controller {
 
         return new Register_response();
     }
+    @CrossOrigin
     @PostMapping ("/login_temp")
     @ResponseBody
     Login_response login_temp(@RequestBody Login_request request){
