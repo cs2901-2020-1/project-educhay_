@@ -35,7 +35,7 @@ public class Usuarios_controller {
         UserRepo.save(new_usr);
         return new Register_response();
     }
-    @GetMapping ("login_chicha")
+    @PostMapping ("login_chicha")
     @ResponseBody
     Login_response login_chicha(@RequestBody Login_request request){
         Optional<Usuario> u_email_validacion =UserRepo.findByEmail(request.email);
