@@ -70,8 +70,9 @@ public class Usuarios_controller {
             to_return.username = my_user.username;
             return to_return;
 
-        }}
-        if (p_email_validacion.isPresent() && request.password == p_email_validacion.get().password){
+        }else{return new Login_response();}}
+        else if (p_email_validacion.isPresent()) {
+            if ( request.password.equals(p_email_validacion.get().password)){
             Profesor my_user = p_email_validacion.get();
             Login_response to_return =  new Login_response();
             to_return.apellido = my_user.apellido;
@@ -81,7 +82,9 @@ public class Usuarios_controller {
             to_return.username = my_user.username;
             return to_return;
 
+        }else{return new Login_response();}}
+        else {
+            return new Login_response();
         }
-        else {return new Login_response();}
     }
 }
