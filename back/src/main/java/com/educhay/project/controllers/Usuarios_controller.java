@@ -7,6 +7,8 @@ import com.educhay.project.requests.Login_request;
 import com.educhay.project.requests.Login_response;
 import com.educhay.project.requests.Register_form;
 import com.educhay.project.requests.Register_response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +19,9 @@ import java.util.Optional;
 public class Usuarios_controller {
     @Autowired
     Usuarios_repository UserRepo;
+    @Autowired
     Profesor_repository ProfeRepo;
+    Logger logger = LoggerFactory.getLogger(Usuarios_controller.class);
     @GetMapping("/")
     public String holaMundo(){
         String to_return = "Hola Mundo!";
@@ -27,17 +31,23 @@ public class Usuarios_controller {
     @ResponseBody
     public Register_response register(@RequestBody Register_form register_form){
         //String username, String password, String nombre , String apellido, String email
+        logger.error("Entro");
         Optional<Usuario> u_email_validacion =UserRepo.findByEmail(register_form.email);
         Optional<Usuario> u_user_validacion = UserRepo.findByUsername(register_form.username);
+        logger.error("Linea 35");
         Optional<Profesor>p_email_validacion = ProfeRepo.findByEmail(register_form.email);
         Optional<Profesor>p_user_validacion = ProfeRepo.findByUsername(register_form.username);
         if (u_email_validacion.isPresent() || u_user_validacion.isPresent() || p_email_validacion.isPresent() || p_user_validacion.isPresent() ){
             Register_response toReturn= new Register_response();
             toReturn.confirmation = false;
+            logger.error("Return 1");
+
             return toReturn;
         }
         Usuario new_usr = new Usuario(register_form.username,register_form.password,register_form.nombre,register_form.apellido,register_form.email);
         UserRepo.save(new_usr);
+        logger.error("Return 2");
+
         return new Register_response();
     }
     @PostMapping ("/login_temp")
