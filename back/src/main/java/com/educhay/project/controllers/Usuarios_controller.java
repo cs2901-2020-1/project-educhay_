@@ -18,6 +18,11 @@ public class Usuarios_controller {
     @Autowired
     Usuarios_repository UserRepo;
     Profesor_repository ProfeRepo;
+    @GetMapping("/")
+    public String holaMundo(){
+        String to_return = "Hola Mundo!";
+        return to_return;
+    }
     @PostMapping("/register")
     @ResponseBody
     public Register_response register(@RequestBody Register_form register_form){
