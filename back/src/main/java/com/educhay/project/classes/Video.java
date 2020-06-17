@@ -18,7 +18,8 @@ public class Video {
     @OneToOne
     public Profesor creador;
     public Float rating;
-    public String unidad;
+    @OneToOne
+    public Unidad unidad;
     public String url_stream;
     public String nombre ;
     public String titulo ;

@@ -3,7 +3,10 @@ package com.educhay.project.repository;
 import com.educhay.project.classes.Usuario;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.Optional;
+
 public interface Usuarios_repository extends CrudRepository<Usuario, Long> {
-    Usuario findByUsername(String username);
-    Usuario findById (long id);
+    Optional<Usuario> findByUsername(String username);
+    Optional<Usuario> findByEmail(String email);
+    Optional<Usuario> findById (long id);
 }

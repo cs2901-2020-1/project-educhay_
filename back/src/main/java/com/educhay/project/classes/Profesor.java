@@ -11,11 +11,12 @@ import java.util.List;
 import java.util.Optional;
 @Entity
 public class Profesor extends Usuario {
-
+    public Boolean is_SUPER_admin;
+    //TODO
     public Boolean is_admin;
+    //TODO: hacer todo con is_admin , borrar cuentas o subir a profe
     @OneToMany
     public List<Video> videos;
-
     public boolean addVideoToProfesor(Video _video){
         if (videos.contains(_video)){
             return false;
@@ -36,7 +37,7 @@ public class Profesor extends Usuario {
     }
     public boolean moveUnidad(Video video, Unidad unidad){
         if (video.creador == this){
-            video.unidad = unidad.nombre;
+            video.unidad = unidad;
             return true;
         }
         return false;
