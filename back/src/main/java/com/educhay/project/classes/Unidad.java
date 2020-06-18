@@ -16,9 +16,9 @@ public class Unidad {
     public String nombre;
     public String curso ;
     public String grado;
-    public boolean addVideo(Video id){
-        if (videos.contains(id)){return false;}
-        videos.add(id);
+    public boolean addVideo(Video vid){
+        if (videos.contains(vid)){return false;}
+        videos.add(vid);
         return true;
     }
     public long getId() {

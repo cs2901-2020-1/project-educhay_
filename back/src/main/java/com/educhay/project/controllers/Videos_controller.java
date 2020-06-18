@@ -4,9 +4,7 @@ import com.educhay.project.classes.Unidad;
 import com.educhay.project.classes.Video;
 import com.educhay.project.repository.Unidad_repository;
 import com.educhay.project.repository.Video_repository;
-import com.educhay.project.requests.Unidad_response;
-import com.educhay.project.requests.Video_response;
-import com.educhay.project.requests.Videos_by_unit_request;
+import com.educhay.project.requests.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +20,15 @@ public class Videos_controller {
     Video_repository video_repository;
     @Autowired
     Unidad_repository unidad_repository;
+    @PostMapping("/unidades/new")
+    public Register_response new_unit(@RequestBody Unidad_post unidad_post){
+        Unidad my_unidad = new Unidad();
+        my_unidad.nombre = unidad_post.nombre;
+        my_unidad.curso = unidad_post.curso;
+        my_unidad.grado = unidad_post.grado;
+        unidad_repository.save(my_unidad);
+        return new Register_response();
+    }
     @GetMapping("/unidades")
     @ResponseBody
     public unit_list dump(){
