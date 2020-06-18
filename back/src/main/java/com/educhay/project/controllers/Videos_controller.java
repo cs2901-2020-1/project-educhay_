@@ -4,13 +4,11 @@ import com.educhay.project.classes.Unidad;
 import com.educhay.project.classes.Video;
 import com.educhay.project.repository.Unidad_repository;
 import com.educhay.project.repository.Video_repository;
+import com.educhay.project.requests.Unidad_response;
 import com.educhay.project.requests.Video_response;
 import com.educhay.project.requests.Videos_by_unit_request;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +17,33 @@ import java.util.Optional;
 @RestController
 public class Videos_controller {
     static class video_list extends ArrayList<Video_response>{}
+    static class unit_list extends ArrayList<Unidad_response>{}
     @Autowired
     Video_repository video_repository;
     @Autowired
     Unidad_repository unidad_repository;
+    @GetMapping("/unidades")
+    @ResponseBody
+    public unit_list dump(){
+        unit_list to_return =new unit_list();
+        Iterable<Unidad> my_iterable = unidad_repository.findAll();
+        my_iterable.forEach( u ->{
+            Unidad_response buffer = new Unidad_response();
+            buffer.curso = u.curso;
+            buffer.grado = u.grado;
+            buffer.nombre= u.nombre;
+            buffer.id = u.getId();
+            ArrayList<Long>vid_id = new ArrayList<>();
+            for(Video vid : u.videos){
+                vid_id.add(vid.getId());
+            }
+            buffer.videos = vid_id;
+            to_return.add(buffer);
+        });
+        return to_return;
+
+    }
+
     @PostMapping("/unit_videos")
     @ResponseBody
     public video_list videosByUnit(@RequestBody Videos_by_unit_request request){

@@ -11,7 +11,7 @@ public class Unidad {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @OneToMany
-    List<Video> videos;
+    public List<Video> videos;
     @Column(unique = true)
     public String nombre;
     public String curso ;
