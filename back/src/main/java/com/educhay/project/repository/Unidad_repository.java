@@ -10,6 +10,9 @@ import java.util.Optional;
 public interface Unidad_repository extends CrudRepository<Unidad, Long> {
     //nombre, curso , grado;
     Optional<Unidad> findByNombre(String _nombre);
+
     ArrayList<Unidad> findByCurso(String _curso);
+
     ArrayList<Unidad> findByGrado(String _grado);
+
 }

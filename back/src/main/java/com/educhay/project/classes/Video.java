@@ -10,36 +10,47 @@ import java.util.List;
 
 @Entity
 public class Video {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column
-    public Long counter ;
+    public Long counter;
+    //For the rating
     @OneToOne
     public Profesor creador;
     public Float rating;
     @OneToOne
     public Unidad unidad;
     public String url_stream;
-    public String nombre ;
-    public String titulo ;
+    //TODO: uno de estos esta por gusto
+    public String nombre;
+    public String titulo;
     public String url_download;
     @OneToMany
     List<Comentario> comments;
+    //comments are to be loaded by video id
     @ElementCollection
     List<Long> rating_users;
-    boolean rate(Long _usuario, int _rating){
-        if (rating_users.contains(_usuario)){
+
+    boolean rate(Long _usuario, int _rating) {
+        if (rating_users.contains(_usuario)) {
             return false;
         }
         rating_users.add(_usuario);
-        rating = ((rating * counter) + _rating)/counter+1;
-        counter ++;
+        rating = ((rating * counter) + _rating) / counter + 1;
+        counter++;
         return true;
     }
-    boolean comment(String content , Usuario _usuario, Date fecha){
-        Comentario new_comment  = new Comentario(_usuario , fecha, id, content);
+
+    boolean comment(String content, Usuario _usuario, Date fecha) {
+        Comentario new_comment = new Comentario(_usuario, fecha, id, content);
         return true;
+    }
+
+    public Long getId() {
+        return id;
     }
     //TODO: Default constructor,meter el video a todas las listas necesarias en construccion, Play, download, jalar fecha y el usuario de la sesion, quitarlos como parametro
 }
