@@ -35,10 +35,10 @@ public class Usuarios_controller {
         //String username, String password, String nombre , String apellido, String email
 
         Optional<Usuario> u_email_validacion =UserRepo.findByEmail(register_form.email);
-        Optional<Usuario> u_user_validacion = UserRepo.findByUsername(register_form.username);
+//        Optional<Usuario> u_user_validacion = UserRepo.findByUsername(register_form.username);
         Optional<Profesor>p_email_validacion = ProfeRepo.findByEmail(register_form.email);
         Optional<Profesor>p_user_validacion = ProfeRepo.findByUsername(register_form.username);
-        if (u_email_validacion.isPresent() || u_user_validacion.isPresent() || p_email_validacion.isPresent() || p_user_validacion.isPresent() ){
+        if (u_email_validacion.isPresent()/* || u_user_validacion.isPresent()*/ || p_email_validacion.isPresent() || p_user_validacion.isPresent() ){
             Register_response toReturn= new Register_response();
             toReturn.confirmation = false;
         }
