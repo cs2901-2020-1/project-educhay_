@@ -18,7 +18,7 @@ public class Profesor extends Usuario {
     //TODO: hacer todo con is_admin , borrar cuentas o subir a profe
     @OneToMany
     public List<Video> videos;
-
+    public Profesor(){};
     public Profesor(String username, String password, String nombre, String apellido, String email) {
         super.username = username;
         super.password = password;

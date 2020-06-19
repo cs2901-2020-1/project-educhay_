@@ -69,6 +69,7 @@ public class Usuarios_controller {
         boolean one = u_email_validacion.isPresent();
 
         if (one) {
+
             String repo_pass = u_email_validacion.get().password;
             boolean two = (request.password.equals(attributeEncryptor.convertToEntityAttribute(repo_pass)));
             if (two) {
@@ -86,7 +87,7 @@ public class Usuarios_controller {
                 return new Login_response();
             }
         } else if (p_email_validacion.isPresent()) {
-            if (request.password.equals(p_email_validacion.get().password)) {
+            if (request.password.equals(attributeEncryptor.convertToEntityAttribute(p_email_validacion.get().password))) {
                 Profesor my_user = p_email_validacion.get();
                 Login_response to_return = new Login_response();
                 to_return.apellido = my_user.apellido;
