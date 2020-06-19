@@ -1,5 +1,6 @@
 package com.educhay.project.controllers;
 
+import com.educhay.project.classes.AttributeEncryptor;
 import com.educhay.project.classes.Profesor;
 import com.educhay.project.classes.Usuario;
 import com.educhay.project.repository.Profesor_repository;
@@ -22,6 +23,7 @@ public class Usuarios_controller {
     Usuarios_repository UserRepo;
     @Autowired
     Profesor_repository ProfeRepo;
+    AttributeEncryptor attributeEncryptor;
     Logger logger = LoggerFactory.getLogger(Usuarios_controller.class);
 
     @CrossOrigin
@@ -68,7 +70,7 @@ public class Usuarios_controller {
 
         if (one) {
             String repo_pass = u_email_validacion.get().password;
-            boolean two = (request.password.equals(repo_pass));
+            boolean two = (request.password.equals(attributeEncryptor.convertToEntityAttribute(repo_pass)));
             if (two) {
                 logger.error("Entro");
                 Usuario my_user = u_email_validacion.get();

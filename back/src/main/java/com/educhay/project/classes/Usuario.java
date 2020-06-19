@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
 public class Usuario {
     @Id
@@ -11,7 +12,9 @@ public class Usuario {
     private long id;
     @Column(unique = true)
     public String username;
-    public String nombre, apellido, password;
+    public String nombre, apellido;
+    @Convert(converter = AttributeEncryptor.class)
+    public String password;
     @Column(unique = true)
     public String email;
     @OneToMany
