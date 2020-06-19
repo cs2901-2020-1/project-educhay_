@@ -45,9 +45,14 @@ public class Usuarios_controller {
             Register_response toReturn = new Register_response();
             toReturn.confirmation = false;
         }
-        Usuario new_usr = new Usuario(register_form.username, register_form.password, register_form.nombre, register_form.apellido, register_form.email);
-        UserRepo.save(new_usr);
 
+        if (register_form.email.equals("profe@utec.edu.pe")) {
+            Profesor new_profe = new Profesor(register_form.username, register_form.password, register_form.nombre, register_form.apellido, register_form.email);
+            ProfeRepo.save(new_profe);
+        } else {
+            Usuario new_usr = new Usuario(register_form.username, register_form.password, register_form.nombre, register_form.apellido, register_form.email);
+            UserRepo.save(new_usr);
+        }
 
         return new Register_response();
     }
@@ -85,6 +90,7 @@ public class Usuarios_controller {
                 to_return.apellido = my_user.apellido;
                 to_return.email = my_user.email;
                 to_return.is_profe = true;
+                to_return.is_admin = my_user.is_admin;
                 to_return.nombre = my_user.nombre;
                 to_return.username = my_user.username;
                 return to_return;
