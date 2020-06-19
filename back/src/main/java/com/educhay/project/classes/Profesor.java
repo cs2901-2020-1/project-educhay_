@@ -19,13 +19,13 @@ public class Profesor extends Usuario {
     @OneToMany
     public List<Video> videos;
     public Profesor(){};
-    public Profesor(String username, String password, String nombre, String apellido, String email) {
-        super.username = username;
-        super.password = password;
-        super.nombre = nombre;
-        super.apellido = apellido;
-        super.email = email;
-        this.is_admin = true;
+    public Profesor(String _username, String _password, String _nombre, String _apellido, String _email) {
+        username = _username;
+        password = _password;
+        nombre = _nombre;
+        apellido = _apellido;
+        email = _email;
+        is_admin = true;
     }
 
     public boolean addVideoToProfesor(Video _video) {
