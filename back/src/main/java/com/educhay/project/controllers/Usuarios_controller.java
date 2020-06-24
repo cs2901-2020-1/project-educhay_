@@ -41,20 +41,20 @@ public class Usuarios_controller {
         //String username, String password, String nombre , String apellido, String email
 
         Optional<Usuario> u_email_validacion = UserRepo.findByEmail(register_form.email);
-        Optional<Usuario> u_user_validacion = UserRepo.findByUsername(register_form.username);
+
         Optional<Profesor> p_email_validacion = ProfeRepo.findByEmail(register_form.email);
-        Optional<Profesor> p_user_validacion = ProfeRepo.findByUsername(register_form.username);
-        if (u_email_validacion.isPresent() || u_user_validacion.isPresent() || p_email_validacion.isPresent() || p_user_validacion.isPresent()) {
+
+        if (u_email_validacion.isPresent() || p_email_validacion.isPresent() ) {
             Register_response toReturn = new Register_response();
             toReturn.confirmation = false;
         }
 
         if (register_form.email.equals("profe@utec.edu.pe")) {
-            Profesor new_profe = new Profesor(register_form.username, register_form.password, register_form.nombre, register_form.apellido, register_form.email);
+            Profesor new_profe = new Profesor(register_form.password, register_form.nombre, register_form.apellido, register_form.email);
             ProfeRepo.save(new_profe);
             logger.error("profe saved");
         } else {
-            Usuario new_usr = new Usuario(register_form.username, register_form.password, register_form.nombre, register_form.apellido, register_form.email);
+            Usuario new_usr = new Usuario(register_form.password, register_form.nombre, register_form.apellido, register_form.email);
             UserRepo.save(new_usr);
             logger.error("no deberia entrar");
         }
@@ -87,7 +87,7 @@ public class Usuarios_controller {
                 to_return.is_profe = true;
                 to_return.is_admin = my_user.is_admin;
                 to_return.nombre = my_user.nombre;
-                to_return.username = my_user.username;
+
                 return to_return;
 
             }else {
@@ -107,7 +107,7 @@ public class Usuarios_controller {
                 to_return.email = my_user.email;
                 to_return.is_profe = false;
                 to_return.nombre = my_user.nombre;
-                to_return.username = my_user.username;
+
                 return to_return;
 
             } else {
