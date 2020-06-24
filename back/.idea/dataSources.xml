@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="PostgreSQL - postgres@localhost" uuid="6ce137a9-bfbd-45d7-898e-7d5912eeb2da">
+    <data-source source="LOCAL" name="educhaydb@educhay.c9h8r0rbhl8m.us-east-1.rds.amazonaws.com" uuid="dcc4250b-c806-4bd6-aa8c-48b565caa7a2">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
-    </data-source>
-    <data-source source="LOCAL" name="postgres@localhost" uuid="69012d94-1430-4aab-987a-3a5aec5d441c">
-      <driver-ref>postgresql</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
+      <jdbc-url>jdbc:postgresql://educhay.c9h8r0rbhl8m.us-east-1.rds.amazonaws.com:5432/educhaydb</jdbc-url>
     </data-source>
   </component>
 </project>
