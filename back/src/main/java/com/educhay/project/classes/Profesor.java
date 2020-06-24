@@ -19,8 +19,8 @@ public class Profesor extends Usuario {
     @OneToMany
     public List<Video> videos;
     public Profesor(){};
-    public Profesor(String _username, String _password, String _nombre, String _apellido, String _email) {
-        username = _username;
+    public Profesor( String _password, String _nombre, String _apellido, String _email) {
+
         password = _password;
         nombre = _nombre;
         apellido = _apellido;

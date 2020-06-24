@@ -10,8 +10,6 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Column(unique = true)
-    public String username;
     public String nombre, apellido;
     @Convert(converter = AttributeEncryptor.class)
     public String password;
@@ -23,8 +21,8 @@ public class Usuario {
     public List<String> notifs;
 
 
-    public Usuario(String username, String password, String nombre, String apellido, String email) {
-        this.username = username;
+    public Usuario(String password, String nombre, String apellido, String email) {
+
         this.password = password;
         this.nombre = nombre;
         this.apellido = apellido;

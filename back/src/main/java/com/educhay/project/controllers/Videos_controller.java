@@ -8,9 +8,7 @@ import com.educhay.project.requests.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 public class Videos_controller {
@@ -37,7 +35,9 @@ public class Videos_controller {
 
     @GetMapping("/unidades")
     @ResponseBody
-    public unit_list dump() {
+    public HashMap<String,HashMap<String,unit_list>> dump() {
+        HashMap<String,HashMap<String,unit_list>> finalMap = new HashMap<String,HashMap<String,unit_list>>();
+        ArrayList<ArrayList<unit_list>> finalList = new ArrayList<>();
         unit_list to_return = new unit_list();
         Iterable<Unidad> my_iterable = unidad_repository.findAll();
         my_iterable.forEach(u -> {
@@ -53,8 +53,20 @@ public class Videos_controller {
             buffer.videos = vid_id;
             to_return.add(buffer);
         });
-        return to_return;
 
+         for (Unidad_response vid:to_return){
+            if (finalMap.get(vid.grado) == null){
+                HashMap<String,unit_list> buffer = new HashMap<String,unit_list>();
+                finalMap.put(vid.grado,buffer);
+            }
+            if ((finalMap.get(vid.grado)).get(vid.curso) == null){
+                unit_list buffer = new unit_list();
+                finalMap.get(vid.grado).put(vid.curso,buffer);
+            }
+            unit_list to_append = (finalMap.get(vid.grado)).get(vid.curso);
+            to_append.add(vid);
+         }
+    return finalMap;
     }
 
     @PostMapping("/unit_videos")
