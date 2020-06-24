@@ -3,6 +3,7 @@ package com.educhay.project.controllers;
 import com.educhay.project.classes.AttributeEncryptor;
 import com.educhay.project.classes.Profesor;
 import com.educhay.project.classes.Usuario;
+import com.educhay.project.errores.OrderNotFoundException;
 import com.educhay.project.repository.Profesor_repository;
 import com.educhay.project.repository.Usuarios_repository;
 import com.educhay.project.requests.Login_request;
@@ -91,7 +92,7 @@ public class Usuarios_controller {
                 return to_return;
 
             }else {
-                return new Login_response();
+                throw new OrderNotFoundException();
             }
 
         } else if (one) {
@@ -111,10 +112,10 @@ public class Usuarios_controller {
                 return to_return;
 
             } else {
-                return new Login_response();
+                throw new OrderNotFoundException();
             }
         } else {
-            return new Login_response();
+            throw new OrderNotFoundException();
         }
     }
 }
