@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 import java.util.PropertyPermission;
-
+@CrossOrigin
 @RestController
 public class Usuarios_controller {
     @Autowired

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 
-
+@CrossOrigin
 @RestController
 public class Videos_controller {
     static class video_list extends ArrayList<Video_response> {
@@ -26,6 +26,8 @@ public class Videos_controller {
     Unidad_repository unidad_repository;
 
 
+    //@PostMapping("/videos/POST")
+    //public Register_response insertVideo(@RequestBody )
 
     @PostMapping("/unit_videos")
     @ResponseBody
