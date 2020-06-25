@@ -8,6 +8,8 @@ import com.educhay.project.repository.Profesor_repository;
 import com.educhay.project.repository.Unidad_repository;
 import com.educhay.project.repository.Video_repository;
 import com.educhay.project.requests.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +31,7 @@ public class Videos_controller {
     Unidad_repository unidad_repository;
     @Autowired
     Profesor_repository profesor_repository;
+    Logger logger = LoggerFactory.getLogger(Usuarios_controller.class);
 
 
     @PostMapping("/videos/POST")
@@ -43,10 +46,11 @@ public class Videos_controller {
         }
     }
 
-    @PostMapping("/unit_videos")
+    @PostMapping("/unit_videos/{my_id}")
     @ResponseBody
-    public video_list videosByUnit(@RequestBody Videos_by_unit_request request) {
-        Optional<Unidad> my_unit_o = unidad_repository.findByNombre(request.nombre);
+    public video_list videosByUnit(@PathVariable(value = "my_id") Long request_id) {
+        logger.error(Long.toString(request_id));
+        Optional<Unidad> my_unit_o = unidad_repository.findById(request_id);
         if (my_unit_o.isPresent()) {
             Unidad my_unit = my_unit_o.get();
             ArrayList<Video> videos = video_repository.findByUnidad(my_unit);
@@ -64,8 +68,7 @@ public class Videos_controller {
             }
             return return_list;
         } else {
-            video_list empty_list = new video_list();
-            return empty_list;
+            throw new OrderNotFoundException();
         }
 
     }
