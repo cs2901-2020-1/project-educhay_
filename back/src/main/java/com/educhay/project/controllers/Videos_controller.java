@@ -33,7 +33,7 @@ public class Videos_controller {
     Profesor_repository profesor_repository;
     Logger logger = LoggerFactory.getLogger(Usuarios_controller.class);
 
-
+    @CrossOrigin
     @PostMapping("/videos/POST")
     public Register_response insertVideo(@RequestBody Video_request video_request){
         Optional<Profesor> profe = profesor_repository.findByEmail(video_request.creador_email);
@@ -45,7 +45,7 @@ public class Videos_controller {
             return new Register_response();
         }
     }
-
+    @CrossOrigin
     @PostMapping("/unit_videos/{my_id}")
     @ResponseBody
     public video_list videosByUnit(@PathVariable(value = "my_id") Long request_id) {
