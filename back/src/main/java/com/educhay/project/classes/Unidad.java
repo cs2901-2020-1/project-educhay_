@@ -17,6 +17,7 @@ public class Unidad {
     public String nombre;
     public String curso;
     public String grado;
+    public String descripcion;
 
     public boolean addVideo(Video vid) {
         if (videos.contains(vid)) {

@@ -38,6 +38,7 @@ public class Unidades_controller {
             buffer.curso = u.curso;
             buffer.grado = u.grado;
             buffer.nombre = u.nombre;
+            buffer.descripcion = u.descripcion;
             buffer.id = u.getId();
             to_return.add(buffer);
         });
