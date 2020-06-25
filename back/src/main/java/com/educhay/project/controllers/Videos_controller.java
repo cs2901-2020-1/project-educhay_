@@ -1,7 +1,10 @@
 package com.educhay.project.controllers;
 
+import com.educhay.project.classes.Profesor;
 import com.educhay.project.classes.Unidad;
 import com.educhay.project.classes.Video;
+import com.educhay.project.errores.OrderNotFoundException;
+import com.educhay.project.repository.Profesor_repository;
 import com.educhay.project.repository.Unidad_repository;
 import com.educhay.project.repository.Video_repository;
 import com.educhay.project.requests.*;
@@ -24,10 +27,21 @@ public class Videos_controller {
     Video_repository video_repository;
     @Autowired
     Unidad_repository unidad_repository;
+    @Autowired
+    Profesor_repository profesor_repository;
 
 
-    //@PostMapping("/videos/POST")
-    //public Register_response insertVideo(@RequestBody )
+    @PostMapping("/videos/POST")
+    public Register_response insertVideo(@RequestBody Video_request video_request){
+        Optional<Profesor> profe = profesor_repository.findByEmail(video_request.creador_email);
+        Optional<Unidad> unidad = unidad_repository.findByNombre(video_request._unidad);
+        if (!profe.isPresent() || !unidad.isPresent()){throw new OrderNotFoundException();}
+        else {
+            Video vid = new Video(profe.get(),unidad.get(), video_request.url_stream, video_request.titulo, video_request.url_download);
+            video_repository.save(vid);
+            return new Register_response();
+        }
+    }
 
     @PostMapping("/unit_videos")
     @ResponseBody

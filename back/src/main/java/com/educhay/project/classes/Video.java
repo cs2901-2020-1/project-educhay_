@@ -24,8 +24,7 @@ public class Video {
     @OneToOne
     public Unidad unidad;
     public String url_stream;
-    //TODO: uno de estos esta por gusto
-    public String nombre;
+
     public String titulo;
     public String url_download;
     @OneToMany
@@ -48,9 +47,24 @@ public class Video {
         Comentario new_comment = new Comentario(_usuario, fecha, id, content);
         return true;
     }
+    public  Video(){}
 
     public Long getId() {
         return id;
+    }
+    public Video(Profesor _creador, Unidad _unidad, String _url_stream, String _titulo, String _url_download){
+        creador = _creador;
+        unidad = _unidad;
+        url_stream = _url_stream;
+        url_download = _url_download;
+        titulo = _titulo;
+
+        counter = 0L;
+        rating = 0F;
+        comments = new ArrayList<Comentario>();
+        rating_users = new ArrayList<Usuario>();
+        unidad.addVideo(this);
+        creador.addVideoToProfesor(this);
     }
     //TODO: Default constructor,meter el video a todas las listas necesarias en construccion, Play, download, jalar fecha y el usuario de la sesion, quitarlos como parametro
 }
