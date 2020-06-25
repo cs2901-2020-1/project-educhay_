@@ -39,25 +39,20 @@ public class Unidades_controller {
             buffer.grado = u.grado;
             buffer.nombre = u.nombre;
             buffer.id = u.getId();
-            ArrayList<Long> vid_id = new ArrayList<>();
-            for (Video vid : u.videos) {
-                vid_id.add(vid.getId());
-            }
-            buffer.videos = vid_id;
             to_return.add(buffer);
         });
 
-        for (Unidad_response vid:to_return){
-            if (finalMap.get(vid.grado) == null){
+        for (Unidad_response unit:to_return){
+            if (finalMap.get(unit.grado) == null){
                 HashMap<String, Videos_controller.unit_list> buffer = new HashMap<String, Videos_controller.unit_list>();
-                finalMap.put(vid.grado,buffer);
+                finalMap.put(unit.grado,buffer);
             }
-            if ((finalMap.get(vid.grado)).get(vid.curso) == null){
+            if ((finalMap.get(unit.grado)).get(unit.curso) == null){
                 Videos_controller.unit_list buffer = new Videos_controller.unit_list();
-                finalMap.get(vid.grado).put(vid.curso,buffer);
+                finalMap.get(unit.grado).put(unit.curso,buffer);
             }
-            Videos_controller.unit_list to_append = (finalMap.get(vid.grado)).get(vid.curso);
-            to_append.add(vid);
+            Videos_controller.unit_list to_append = (finalMap.get(unit.grado)).get(unit.curso);
+            to_append.add(unit);
         }
         return finalMap;
     }
