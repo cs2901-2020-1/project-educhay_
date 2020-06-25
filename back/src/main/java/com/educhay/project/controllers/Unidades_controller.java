@@ -22,6 +22,7 @@ public class Unidades_controller {
         my_unidad.nombre = unidad_post.nombre;
         my_unidad.curso = unidad_post.curso;
         my_unidad.grado = unidad_post.grado;
+        my_unidad.descripcion = unidad_post.descripcion;
         unidad_repository.save(my_unidad);
         return new Register_response();
     }

@@ -46,7 +46,7 @@ public class Videos_controller {
         }
     }
     @CrossOrigin
-    @PostMapping("/unit_videos/{my_id}")
+    @GetMapping("/unit_videos/{my_id}")
     @ResponseBody
     public video_list videosByUnit(@PathVariable(value = "my_id") Long request_id) {
         logger.error(Long.toString(request_id));
