@@ -33,7 +33,7 @@ public class Video {
     @OneToMany
     List<Usuario> rating_users;
 
-    boolean rate(Usuario _usuario, int _rating) {
+    public boolean rate(Usuario _usuario, int _rating) {
         if (rating_users.contains(_usuario)) {
             return false;
         }

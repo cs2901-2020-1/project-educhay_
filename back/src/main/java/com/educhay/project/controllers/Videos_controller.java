@@ -2,28 +2,25 @@ package com.educhay.project.controllers;
 
 import com.educhay.project.classes.Profesor;
 import com.educhay.project.classes.Unidad;
+import com.educhay.project.classes.Usuario;
 import com.educhay.project.classes.Video;
 import com.educhay.project.errores.OrderNotFoundException;
 import com.educhay.project.repository.Profesor_repository;
 import com.educhay.project.repository.Unidad_repository;
+import com.educhay.project.repository.Usuarios_repository;
 import com.educhay.project.repository.Video_repository;
 import com.educhay.project.requests.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.*;
-
 
 @CrossOrigin
 @RestController
 public class Videos_controller {
-    static class video_list extends ArrayList<Video_response> {
-    }
-
-    static class unit_list extends ArrayList<Unidad_response> {
-    }
+    static class video_list extends ArrayList<Video_response> {}
+    static class unit_list extends ArrayList<Unidad_response> {}
 
     @Autowired
     Video_repository video_repository;
@@ -31,6 +28,8 @@ public class Videos_controller {
     Unidad_repository unidad_repository;
     @Autowired
     Profesor_repository profesor_repository;
+    @Autowired
+    Usuarios_repository usuarios_repository;
     Logger logger = LoggerFactory.getLogger(Usuarios_controller.class);
 
     @CrossOrigin
@@ -43,6 +42,21 @@ public class Videos_controller {
             Video vid = new Video(profe.get(),unidad.get(), video_request.url_stream, video_request.titulo, video_request.url_download);
             video_repository.save(vid);
             return new Register_response();
+        }
+    }
+    @CrossOrigin
+    @PostMapping("/videos/rate")
+    public float video_rate(@RequestBody Rate_request rate_request){
+        Optional<Video> my_vid_o = video_repository.findById(rate_request.video_id);
+        Optional<Usuario> my_user_o =  usuarios_repository.findByEmail(rate_request.usuario_email);
+        if (!my_user_o.isPresent() || !my_vid_o.isPresent()){
+            throw new OrderNotFoundException();
+        }
+        else {
+            Video vid = my_vid_o.get();
+            Usuario usr = my_user_o.get();
+            vid.rate(usr,rate_request.rating);
+            return vid.rating;
         }
     }
     @CrossOrigin
