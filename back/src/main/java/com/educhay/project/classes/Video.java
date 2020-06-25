@@ -31,10 +31,10 @@ public class Video {
     @OneToMany
     List<Comentario> comments;
     //comments are to be loaded by video id
-    @ElementCollection
-    List<Long> rating_users;
+    @OneToMany
+    List<Usuario> rating_users;
 
-    boolean rate(Long _usuario, int _rating) {
+    boolean rate(Usuario _usuario, int _rating) {
         if (rating_users.contains(_usuario)) {
             return false;
         }
