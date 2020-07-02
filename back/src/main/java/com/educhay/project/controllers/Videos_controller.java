@@ -87,7 +87,7 @@ public class Videos_controller {
 
     }
     @CrossOrigin
-    @GetMapping("/unit_videos/{my_id}")
+    @GetMapping("/video/{my_id}")
     @ResponseBody
     public video_response_single videosById(@PathVariable(value = "my_id") Long request_id)
     {
