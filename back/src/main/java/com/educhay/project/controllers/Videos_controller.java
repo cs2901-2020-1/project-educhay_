@@ -56,7 +56,9 @@ public class Videos_controller {
             Video vid = my_vid_o.get();
             Usuario usr = my_user_o.get();
             vid.rate(usr,rate_request.rating);
+            video_repository.save(vid);
             return vid.rating;
+
         }
     }
     @CrossOrigin
