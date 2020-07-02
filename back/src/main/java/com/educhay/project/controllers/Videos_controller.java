@@ -104,10 +104,11 @@ public class Videos_controller {
 
             buffer.url_download = x.url_download;
             buffer.url_stream = x.url_stream;
-            buffer.comments = x.comments;
+
             buffer.unidad = x.unidad.nombre;
             buffer.curso = x.unidad.curso;
             buffer.grado = x.unidad.grado;
+            for (Object comment:(x.comments)){}
             return buffer;
 
         }else {
