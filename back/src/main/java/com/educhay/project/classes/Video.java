@@ -44,7 +44,7 @@ public class Video {
     }
 
     boolean comment(String content, Usuario _usuario, Date fecha) {
-        Comentario new_comment = new Comentario(_usuario, fecha, id, content);
+        Comentario new_comment = new Comentario(_usuario, fecha, content);
         return true;
     }
     public  Video(){}
