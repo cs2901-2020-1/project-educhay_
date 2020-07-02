@@ -38,7 +38,7 @@ public class Video {
             return false;
         }
         rating_users.add(_usuario);
-        rating = ((rating * counter) + _rating) / counter + 1;
+        rating = ((rating * counter) + _rating) / (counter + 1);
         counter++;
         return true;
     }
