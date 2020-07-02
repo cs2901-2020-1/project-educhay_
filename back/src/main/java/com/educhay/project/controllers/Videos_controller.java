@@ -45,7 +45,7 @@ public class Videos_controller {
         }
     }
     @CrossOrigin
-    @PostMapping("/videos/rate")
+    @PutMapping("/videos/rate")
     public float video_rate(@RequestBody Rate_request rate_request){
         Optional<Video> my_vid_o = video_repository.findById(rate_request.video_id);
         Optional<Usuario> my_user_o =  usuarios_repository.findByEmail(rate_request.usuario_email);
