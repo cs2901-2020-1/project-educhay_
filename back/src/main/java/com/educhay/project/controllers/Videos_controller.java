@@ -89,20 +89,23 @@ public class Videos_controller {
     @CrossOrigin
     @GetMapping("/video/{my_id}")
     @ResponseBody
-    public video_response_single videosById(@PathVariable(value = "my_id") Long request_id)
+    public Video_response_single videosById(@PathVariable(value = "my_id") Long request_id)
     {
         Optional<Video> my_vid_o = video_repository.findById(request_id);
         if(my_vid_o.isPresent()){
             Video x = my_vid_o.get();
-            video_response_single buffer = new video_response_single();
+            Video_response_single buffer = new Video_response_single();
             buffer.creador_email = x.creador.email;
             buffer.id = x.getId();
             buffer.rating = x.rating;
             buffer.titulo = x.titulo;
-            buffer.Unidad = x.unidad.nombre;
+
             buffer.url_download = x.url_download;
             buffer.url_stream = x.url_stream;
             buffer.comments = x.comments;
+            buffer.unidad = x.unidad.nombre;
+            buffer.curso = x.unidad.curso;
+            buffer.grado = x.unidad.grado;
             return buffer;
 
         }else {
