@@ -1,9 +1,6 @@
 package com.educhay.project.controllers;
 
-import com.educhay.project.classes.Profesor;
-import com.educhay.project.classes.Unidad;
-import com.educhay.project.classes.Usuario;
-import com.educhay.project.classes.Video;
+import com.educhay.project.classes.*;
 import com.educhay.project.errores.OrderNotFoundException;
 import com.educhay.project.repository.Profesor_repository;
 import com.educhay.project.repository.Unidad_repository;
@@ -14,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.xml.stream.events.Comment;
 import java.util.*;
 
 @CrossOrigin
@@ -98,6 +97,8 @@ public class Videos_controller {
             Video x = my_vid_o.get();
             Video_response_single buffer = new Video_response_single();
             buffer.creador_email = x.creador.email;
+            buffer.creador_nombre = x.creador.nombre;
+            buffer.creador_apellido = x.creador.apellido;
             buffer.id = x.getId();
             buffer.rating = x.rating;
             buffer.titulo = x.titulo;
@@ -108,7 +109,17 @@ public class Videos_controller {
             buffer.unidad = x.unidad.nombre;
             buffer.curso = x.unidad.curso;
             buffer.grado = x.unidad.grado;
-            for (Object comment:(x.comments)){}
+            ArrayList<Comment_response> responses = new ArrayList<Comment_response>();
+            for (Comentario comment:(x.comments)){
+                Comment_response tmp = new Comment_response();
+                tmp.video_id =x.getId();
+                tmp.content = comment.content;
+                tmp.fecha = comment.fecha;
+                tmp.comment_id = comment.getId();
+                tmp.email = comment.creador.email;
+                responses.add(tmp);
+            }
+            buffer.comments = responses;
             return buffer;
 
         }else {
