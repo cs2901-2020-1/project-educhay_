@@ -28,7 +28,7 @@ public class Video {
     public String titulo;
     public String url_download;
     @OneToMany
-    List<Comentario> comments;
+    public List<Comentario> comments;
     //comments are to be loaded by video id
     @OneToMany
     List<Usuario> rating_users;
