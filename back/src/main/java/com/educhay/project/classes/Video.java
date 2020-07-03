@@ -43,16 +43,30 @@ public class Video {
         return true;
     }
 
-    boolean comment(String content, Usuario _usuario, Date fecha) {
+    public boolean comment(String content, Usuario _usuario, Date fecha) {
         Comentario new_comment = new Comentario(_usuario, fecha, content);
+        comments.add(new_comment);
         return true;
     }
-    public  Video(){}
+
+    public boolean deleteComment(Long commentId, Usuario usuario) {
+        for (Comentario comment : comments) {
+            if (comment.getId() == commentId) {
+                comments.remove(comment);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Video() {
+    }
 
     public Long getId() {
         return id;
     }
-    public Video(Profesor _creador, Unidad _unidad, String _url_stream, String _titulo, String _url_download){
+
+    public Video(Profesor _creador, Unidad _unidad, String _url_stream, String _titulo, String _url_download) {
         creador = _creador;
         unidad = _unidad;
         url_stream = _url_stream;
