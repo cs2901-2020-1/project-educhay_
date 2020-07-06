@@ -31,13 +31,26 @@ public class Video {
     public List<Comentario> comments;
     //comments are to be loaded by video id
     @OneToMany
-    List<Usuario> rating_users;
+    List<Rating> ratings;
+
 
     public boolean rate(Usuario _usuario, int _rating) {
-        if (rating_users.contains(_usuario)) {
-            return false;
+        Boolean my_bool = true;
+        for (Rating previous_rate :ratings){
+            if (previous_rate.user == _usuario){
+                float tot = rating*counter;
+                counter = counter -1;
+                tot = tot - previous_rate.score;
+                rating = tot/counter;
+                ratings.remove(previous_rate);
+            }
         }
-        rating_users.add(_usuario);
+
+        Rating new_rate = new Rating();
+        new_rate.user = _usuario;
+        new_rate.score = _rating;
+        new_rate.vid = this;
+        ratings.add(new_rate);
         rating = ((rating * counter) + _rating) / (counter + 1);
         counter++;
         return true;
@@ -76,7 +89,7 @@ public class Video {
         counter = 0L;
         rating = 0F;
         comments = new ArrayList<Comentario>();
-        rating_users = new ArrayList<Usuario>();
+        ratings = new ArrayList<Rating>();
         unidad.addVideo(this);
         creador.addVideoToProfesor(this);
     }
