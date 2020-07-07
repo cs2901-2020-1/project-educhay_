@@ -17,8 +17,7 @@ public class Usuario {
     public String email;
     @OneToMany
     public List<Video> vids_vistos;
-    @ElementCollection
-    public List<String> notifs;
+
 
 
     public Usuario(String password, String nombre, String apellido, String email) {

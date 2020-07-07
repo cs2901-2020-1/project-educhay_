@@ -18,6 +18,7 @@ import java.util.*;
 @CrossOrigin
 @RestController
 public class Videos_controller {
+
     static class video_list extends ArrayList<Video_response> {}
     static class unit_list extends ArrayList<Unidad_response> {}
 
@@ -29,8 +30,8 @@ public class Videos_controller {
     Profesor_repository profesor_repository;
     @Autowired
     Usuarios_repository usuarios_repository;
-    Logger logger = LoggerFactory.getLogger(Usuarios_controller.class);
 
+    Logger logger = LoggerFactory.getLogger(Usuarios_controller.class);
     @CrossOrigin
     @PostMapping("/videos/POST")
     public Register_response insertVideo(@RequestBody Video_request video_request){
@@ -39,9 +40,18 @@ public class Videos_controller {
         if (!profe.isPresent() || !unidad.isPresent()){throw new OrderNotFoundException();}
         else {
             Video vid = new Video(profe.get(),unidad.get(), video_request.url_stream, video_request.titulo, video_request.url_download);
+            List<Profesor> admins = new ArrayList<>();
+            Iterable<Profesor> my_iterable= profesor_repository.findAll();
+            my_iterable.forEach(profesor -> {
+                if (profesor.is_admin){
+                    profesor.notifs.add(vid);
+                    profesor_repository.save(profesor);
+                }
+            });
             video_repository.save(vid);
             return new Register_response();
         }
+
     }
     @CrossOrigin
     @PutMapping("/videos/rate")

@@ -18,7 +18,26 @@ public class Profesor extends Usuario {
     //TODO: hacer todo con is_admin , borrar cuentas o subir a profe
     @OneToMany
     public List<Video> videos;
+    @OneToMany
+    public List<Video> notifs;
     public Profesor(){};
+    public List<Video>verNotifs(){
+        List<Video> to_re = notifs;
+        notifs = new ArrayList<Video>();
+        return to_re;
+    }
+    public Profesor(Usuario usuario){
+        apellido = usuario.apellido;
+        email=usuario.email;
+        nombre = usuario.nombre;
+        apellido = usuario.apellido;
+        password = usuario.password;
+        is_admin = false;
+        notifs = new ArrayList<Video>();
+        videos =  new ArrayList<Video>();
+        //TODO:Make api remove from usuario repo after this
+
+    }
     public Profesor( String _password, String _nombre, String _apellido, String _email) {
 
         password = _password;
@@ -26,6 +45,8 @@ public class Profesor extends Usuario {
         apellido = _apellido;
         email = _email;
         is_admin = true;
+        videos =  new ArrayList<Video>();
+        notifs = new ArrayList<Video>();
     }
 
     public boolean addVideoToProfesor(Video _video) {

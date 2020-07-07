@@ -24,7 +24,7 @@ public class Video {
     @OneToOne
     public Unidad unidad;
     public String url_stream;
-
+    public Long views;
     public String titulo;
     public String url_download;
     @OneToMany
@@ -87,6 +87,7 @@ public class Video {
         titulo = _titulo;
 
         counter = 0L;
+        views = 0L;
         rating = 0F;
         comments = new ArrayList<Comentario>();
         ratings = new ArrayList<Rating>();
