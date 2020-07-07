@@ -105,6 +105,7 @@ public class Videos_controller {
         Optional<Video> my_vid_o = video_repository.findById(request_id);
         if(my_vid_o.isPresent()){
             Video x = my_vid_o.get();
+            x.views = x.views + 1;
             Video_response_single buffer = new Video_response_single();
             buffer.creador_email = x.creador.email;
             buffer.creador_nombre = x.creador.nombre;
@@ -112,7 +113,7 @@ public class Videos_controller {
             buffer.id = x.getId();
             buffer.rating = x.rating;
             buffer.titulo = x.titulo;
-
+            buffer.views = x.views;
             buffer.url_download = x.url_download;
             buffer.url_stream = x.url_stream;
 

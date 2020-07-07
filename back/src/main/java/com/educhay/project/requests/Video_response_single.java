@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Video_response_single {
 
-    public Long id;
+    public Long id, views;
     public String creador_email, titulo, url_stream, url_download,creador_nombre,creador_apellido;
     public Float rating;
     public String unidad,curso,grado;
