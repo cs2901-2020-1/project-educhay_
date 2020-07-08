@@ -1,7 +1,6 @@
 package com.educhay.project.controllers;
 
 import com.educhay.project.classes.Unidad;
-import com.educhay.project.classes.Video;
 import com.educhay.project.repository.Unidad_repository;
 import com.educhay.project.requests.Register_response;
 import com.educhay.project.requests.Unidad_post;
@@ -29,10 +28,10 @@ public class Unidades_controller {
 
     @GetMapping("/unidades")
     @ResponseBody
-    public HashMap<String, HashMap<String, Videos_controller.unit_list>> dump() {
-        HashMap<String,HashMap<String, Videos_controller.unit_list>> finalMap = new HashMap<String,HashMap<String, Videos_controller.unit_list>>();
-        ArrayList<ArrayList<Videos_controller.unit_list>> finalList = new ArrayList<>();
-        Videos_controller.unit_list to_return = new Videos_controller.unit_list();
+    public HashMap<String, HashMap<String, Videos_controller.Unit_list>> dump() {
+        HashMap<String,HashMap<String, Videos_controller.Unit_list>> finalMap = new HashMap<String,HashMap<String, Videos_controller.Unit_list>>();
+        ArrayList<ArrayList<Videos_controller.Unit_list>> finalList = new ArrayList<>();
+        Videos_controller.Unit_list to_return = new Videos_controller.Unit_list();
         Iterable<Unidad> my_iterable = unidad_repository.findAll();
         my_iterable.forEach(u -> {
             Unidad_response buffer = new Unidad_response();
@@ -46,14 +45,14 @@ public class Unidades_controller {
 
         for (Unidad_response unit:to_return){
             if (finalMap.get(unit.grado) == null){
-                HashMap<String, Videos_controller.unit_list> buffer = new HashMap<String, Videos_controller.unit_list>();
+                HashMap<String, Videos_controller.Unit_list> buffer = new HashMap<String, Videos_controller.Unit_list>();
                 finalMap.put(unit.grado,buffer);
             }
             if ((finalMap.get(unit.grado)).get(unit.curso) == null){
-                Videos_controller.unit_list buffer = new Videos_controller.unit_list();
+                Videos_controller.Unit_list buffer = new Videos_controller.Unit_list();
                 finalMap.get(unit.grado).put(unit.curso,buffer);
             }
-            Videos_controller.unit_list to_append = (finalMap.get(unit.grado)).get(unit.curso);
+            Videos_controller.Unit_list to_append = (finalMap.get(unit.grado)).get(unit.curso);
             to_append.add(unit);
         }
         return finalMap;

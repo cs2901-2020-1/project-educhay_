@@ -8,7 +8,6 @@ import com.educhay.project.requests.Video_response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,13 +18,13 @@ public class Notif_controller {
     Profesor_repository profesor_repository;
     @PostMapping("/notif/{email}")
     @ResponseBody
-    public Videos_controller.video_list notifs(@PathVariable(value = "email") String my_email){
+    public Videos_controller.Video_list notifs(@PathVariable(value = "email") String my_email){
         Optional<Profesor> optionalProfesor = profesor_repository.findByEmail(my_email);
         if (optionalProfesor.isPresent()) {
             Profesor profesor = optionalProfesor.get();
             List<Video> array = profesor.verNotifs();
             profesor_repository.save(profesor);
-            Videos_controller.video_list return_list = new Videos_controller.video_list();
+            Videos_controller.Video_list return_list = new Videos_controller.Video_list();
             for (Video x:array){
                 Video_response buffer =  new Video_response();
                 buffer.creador_email = x.creador.email;

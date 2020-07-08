@@ -7,21 +7,19 @@ import com.educhay.project.repository.Unidad_repository;
 import com.educhay.project.repository.Usuarios_repository;
 import com.educhay.project.repository.Video_repository;
 import com.educhay.project.requests.*;
-import org.apache.catalina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.stream.events.Comment;
 import java.util.*;
 
 @CrossOrigin
 @RestController
 public class Videos_controller {
 
-    static class video_list extends ArrayList<Video_response> {}
-    static class unit_list extends ArrayList<Unidad_response> {}
+    static class Video_list extends ArrayList<Video_response> {}
+    static class Unit_list extends ArrayList<Unidad_response> {}
 
     @Autowired
     Video_repository video_repository;
@@ -33,6 +31,21 @@ public class Videos_controller {
     Usuarios_repository usuarios_repository;
 
     Logger logger = LoggerFactory.getLogger(Usuarios_controller.class);
+    public Video_list listEncode(List<Video> videos){
+        Video_list return_list = new Video_list();
+        for (Video x : videos) {
+            Video_response buffer = new Video_response();
+            buffer.creador_email = x.creador.email;
+            buffer.id = x.getId();
+            buffer.rating = x.rating;
+            buffer.titulo = x.titulo;
+            buffer.Unidad = x.unidad.nombre;
+            buffer.url_download = x.url_download;
+            buffer.url_stream = x.url_stream;
+            return_list.add(buffer);
+        }
+        return return_list;
+    }
     @CrossOrigin
     @PostMapping("/videos/POST")
     public Register_response insertVideo(@RequestBody Video_request video_request){
@@ -74,30 +87,34 @@ public class Videos_controller {
     @CrossOrigin
     @GetMapping("/unit_videos/{my_id}")
     @ResponseBody
-    public video_list videosByUnit(@PathVariable(value = "my_id") Long request_id) {
+    public Video_list videosByUnit(@PathVariable(value = "my_id") Long request_id) {
         logger.error(Long.toString(request_id));
         Optional<Unidad> my_unit_o = unidad_repository.findById(request_id);
         if (my_unit_o.isPresent()) {
             Unidad my_unit = my_unit_o.get();
             ArrayList<Video> videos = video_repository.findByUnidad(my_unit);
-            video_list return_list = new video_list();
-            for (Video x : videos) {
-                Video_response buffer = new Video_response();
-                buffer.creador_email = x.creador.email;
-                buffer.id = x.getId();
-                buffer.rating = x.rating;
-                buffer.titulo = x.titulo;
-                buffer.Unidad = x.unidad.nombre;
-                buffer.url_download = x.url_download;
-                buffer.url_stream = x.url_stream;
-                return_list.add(buffer);
-            }
+            Video_list return_list = new Video_list();
+            return_list = listEncode(videos);
             return return_list;
         } else {
             throw new OrderNotFoundException();
         }
 
     }
+    @CrossOrigin
+    @GetMapping("/videos/historicos/{email}")
+    @ResponseBody
+    public Video_list videosHistoricos(@PathVariable(value = "email")String email)
+    {
+        Optional<Usuario> optionalUsuario =usuarios_repository.findByEmail(email);
+        if (optionalUsuario.isPresent()){
+            Usuario usuario = optionalUsuario.get();
+            List<Video> videos = usuario.vids_vistos;
+            Video_list video_list = listEncode(videos);
+            return (video_list);
+        }else throw new OrderNotFoundException();
+    }
+
     @CrossOrigin
     @GetMapping("/video")
     @ResponseBody
