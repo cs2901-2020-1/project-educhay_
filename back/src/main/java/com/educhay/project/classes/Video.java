@@ -36,15 +36,19 @@ public class Video {
 
     public boolean rate(Usuario _usuario, int _rating) {
         Boolean my_bool = true;
+        Rating buffer = null;
         for (Rating previous_rate :ratings){
             if (previous_rate.user == _usuario){
                 float tot = rating*counter;
                 counter = counter -1;
                 tot = tot - previous_rate.score;
                 rating = tot/counter;
-                ratings.remove(previous_rate);
+                buffer = previous_rate;
             }
         }
+        if (buffer != null){
+            ratings.remove(buffer);
+        };
 
         Rating new_rate = new Rating();
         new_rate.user = _usuario;

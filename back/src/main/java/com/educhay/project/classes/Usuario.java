@@ -28,9 +28,7 @@ public class Usuario {
         this.email = email;
     }
 
-    public Usuario() {
-    }
-
+    public Usuario() { }
     ;
 
     public boolean valid(String pass) {
