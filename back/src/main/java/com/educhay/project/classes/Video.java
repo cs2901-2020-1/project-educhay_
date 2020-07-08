@@ -72,7 +72,7 @@ public class Video {
 
     public boolean deleteComment(Long commentId, Usuario usuario) {
         for (Comentario comment : comments) {
-            if (comment.getId() == commentId) {
+            if ((comment.getId() ).equals(commentId) ) {
                 comments.remove(comment);
                 return true;
             }
