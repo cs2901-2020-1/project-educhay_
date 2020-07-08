@@ -48,7 +48,7 @@ public class Videos_controller {
                     profesor_repository.save(profesor);
                 }
             });
-            video_repository.save(vid);
+            //video_repository.save(vid);
             return new Register_response();
         }
 
