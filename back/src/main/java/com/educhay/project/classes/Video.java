@@ -42,7 +42,11 @@ public class Video {
                 float tot = rating*counter;
                 counter = counter -1;
                 tot = tot - previous_rate.score;
-                rating = tot/counter;
+                if (counter != 0){
+                    rating = tot / counter;
+                }else {
+                    rating = 0F;
+                };
                 buffer = previous_rate;
             }
         }
