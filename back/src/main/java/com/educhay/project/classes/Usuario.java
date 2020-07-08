@@ -31,12 +31,5 @@ public class Usuario {
     public Usuario() { }
     ;
 
-    public boolean valid(String pass) {
-        if (pass == password) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
 }
