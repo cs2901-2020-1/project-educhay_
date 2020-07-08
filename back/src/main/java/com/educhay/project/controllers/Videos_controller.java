@@ -128,6 +128,8 @@ public class Videos_controller {
                 tmp.fecha = comment.fecha;
                 tmp.comment_id = comment.getId();
                 tmp.email = comment.creador.email;
+                tmp.nombre = comment.creador.nombre;
+                tmp.apellido = comment.creador.apellido;
                 responses.add(tmp);
             }
             buffer.comments = responses;
