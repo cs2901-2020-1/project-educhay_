@@ -8,4 +8,5 @@ public class Video_request {
     public String url_stream;
     public String titulo;
     public String url_download;
+    public String descripcion;
 }

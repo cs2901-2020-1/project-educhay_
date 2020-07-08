@@ -53,7 +53,7 @@ public class Videos_controller {
         Optional<Unidad> unidad = unidad_repository.findByNombre(video_request._unidad);
         if (!profe.isPresent() || !unidad.isPresent()){throw new OrderNotFoundException();}
         else {
-            Video vid = new Video(profe.get(),unidad.get(), video_request.url_stream, video_request.titulo, video_request.url_download);
+            Video vid = new Video(profe.get(),unidad.get(), video_request.url_stream, video_request.titulo, video_request.url_download,video_request.descripcion);
             List<Profesor> admins = new ArrayList<>();
             Iterable<Profesor> my_iterable= profesor_repository.findAll();
             my_iterable.forEach(profesor -> {
@@ -139,7 +139,7 @@ public class Videos_controller {
             buffer.views = x.views;
             buffer.url_download = x.url_download;
             buffer.url_stream = x.url_stream;
-
+            buffer.descripcion = x.descripcion;
             buffer.unidad = x.unidad.nombre;
             buffer.curso = x.unidad.curso;
             buffer.grado = x.unidad.grado;

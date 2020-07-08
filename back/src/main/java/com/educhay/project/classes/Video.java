@@ -22,8 +22,11 @@ public class Video {
     public Profesor creador;
     public Float rating;
     @OneToOne(cascade = CascadeType.ALL)
+
     public Unidad unidad;
+
     public String url_stream;
+    public String descripcion;
     public Long views;
     public String titulo;
     public String url_download;
@@ -87,13 +90,13 @@ public class Video {
         return id;
     }
 
-    public Video(Profesor _creador, Unidad _unidad, String _url_stream, String _titulo, String _url_download) {
+    public Video(Profesor _creador, Unidad _unidad, String _url_stream, String _titulo, String _url_download, String _descripcion) {
         creador = _creador;
         unidad = _unidad;
         url_stream = _url_stream;
         url_download = _url_download;
         titulo = _titulo;
-
+        descripcion = _descripcion;
         counter = 0L;
         views = 0L;
         rating = 0F;
