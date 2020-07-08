@@ -2,10 +2,7 @@ package com.educhay.project.classes;
 
 import com.educhay.project.repository.Video_repository;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -16,9 +13,9 @@ public class Profesor extends Usuario {
     //TODO
     public Boolean is_admin;
     //TODO: hacer todo con is_admin , borrar cuentas o subir a profe
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     public List<Video> videos;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     public List<Video> notifs;
     public Profesor(){};
     public List<Video>verNotifs(){

@@ -11,7 +11,7 @@ public class Unidad {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     public List<Video> videos;
     @Column(unique = true)
     public String nombre;

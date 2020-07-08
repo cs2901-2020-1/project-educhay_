@@ -8,8 +8,8 @@ public class Rating {
     @Id
     private Long id;
     public Integer score;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     public Video vid;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     public Usuario user;
 }

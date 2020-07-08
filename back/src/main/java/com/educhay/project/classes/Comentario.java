@@ -10,7 +10,7 @@ public class Comentario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn
     public Usuario creador;
     public Date fecha;

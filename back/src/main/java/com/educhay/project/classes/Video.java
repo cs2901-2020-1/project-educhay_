@@ -21,16 +21,16 @@ public class Video {
     @OneToOne
     public Profesor creador;
     public Float rating;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     public Unidad unidad;
     public String url_stream;
     public Long views;
     public String titulo;
     public String url_download;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     public List<Comentario> comments;
     //comments are to be loaded by video id
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     List<Rating> ratings;
 
 
