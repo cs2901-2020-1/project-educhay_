@@ -7,6 +7,7 @@ import com.educhay.project.repository.Unidad_repository;
 import com.educhay.project.repository.Usuarios_repository;
 import com.educhay.project.repository.Video_repository;
 import com.educhay.project.requests.*;
+import org.apache.catalina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,13 +99,18 @@ public class Videos_controller {
 
     }
     @CrossOrigin
-    @GetMapping("/video/{my_id}")
+    @GetMapping("/video")
     @ResponseBody
-    public Video_response_single videosById(@PathVariable(value = "my_id") Long request_id)
+    public Video_response_single videosById(@RequestBody Video_single_request video_single_request)
     {
+        Long request_id = video_single_request.id;
+        String email = video_single_request.user_email;
         Optional<Video> my_vid_o = video_repository.findById(request_id);
-        if(my_vid_o.isPresent()){
+        Optional<Usuario> usuarioOptional = usuarios_repository.findByEmail(email);
+        if(my_vid_o.isPresent() && usuarioOptional.isPresent()){
             Video x = my_vid_o.get();
+            Usuario usuario = usuarioOptional.get();
+            usuario.vids_vistos.add(x);
             x.views = x.views + 1;
             Video_response_single buffer = new Video_response_single();
             buffer.creador_email = x.creador.email;

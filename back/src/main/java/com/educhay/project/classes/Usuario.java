@@ -15,7 +15,7 @@ public class Usuario {
     public String password;
     @Column(unique = true)
     public String email;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     public List<Video> vids_vistos;
 
 
