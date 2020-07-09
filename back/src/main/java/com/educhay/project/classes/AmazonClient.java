@@ -34,7 +34,7 @@ public class AmazonClient {
     private String bucketName;
     @Value("AKIAXRZ2O7TSTA2IULLG")
     private String accessKey;
-    @Value("evDD3IW1SG45iH3BNbTBcoNry9hbT62cxGlOFDx7")
+    @Value("")
     private String secretKey;
 
     private Logger logger = LoggerFactory.getLogger(AmazonClient.class);
