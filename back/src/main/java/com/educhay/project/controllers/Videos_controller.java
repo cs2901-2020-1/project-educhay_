@@ -115,7 +115,7 @@ public class Videos_controller {
         }else throw new OrderNotFoundException();
     }
     @CrossOrigin
-    @PutMapping
+    @PutMapping("/video/update")
     public Video_response_single updateVidId(@RequestBody Video_single_request video_single_request){
         Long request_id = video_single_request.id;
         String email = video_single_request.user_email;
