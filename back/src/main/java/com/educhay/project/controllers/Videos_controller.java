@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.*;
 
 @CrossOrigin
@@ -116,6 +117,7 @@ public class Videos_controller {
         }else throw new OrderNotFoundException();
     }
     @CrossOrigin
+    @Transactional
     @PutMapping("/video/update")
     public Video_response_single updateVidId(@RequestBody Video_single_request video_single_request){
         Long request_id = video_single_request.id;
@@ -127,9 +129,6 @@ public class Videos_controller {
             Usuario usuario = usuarioOptional.get();
             x.addView();
             usuario.watch(x);
-            video_repository.save(x);
-            usuarios_repository.save(usuario);
-
             Video_response_single buffer = new Video_response_single();
             buffer.creador_email = x.creador.email;
             buffer.creador_nombre = x.creador.nombre;

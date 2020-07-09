@@ -31,7 +31,9 @@ public class Usuario {
         this.vids_vistos = new ArrayList<Video>();
     }
     public boolean watch(Video video){
-        this.vids_vistos.add(video);
+        if (!vids_vistos.contains(video)) {
+            this.vids_vistos.add(video);
+        }
         return true;
     }
 
