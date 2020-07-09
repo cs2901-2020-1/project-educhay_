@@ -82,6 +82,8 @@ public class Video {
         }
         return false;
     }
+    public Long addView(){this.views = views + 1;
+    return views;}
 
     public Video() {
     }

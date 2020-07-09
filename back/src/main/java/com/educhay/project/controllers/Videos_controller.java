@@ -124,8 +124,8 @@ public class Videos_controller {
         if(my_vid_o.isPresent() && usuarioOptional.isPresent()){
             Video x = my_vid_o.get();
             Usuario usuario = usuarioOptional.get();
-            usuario.vids_vistos.add(x);
-            x.views = x.views + 1;
+            usuario.watch(x);
+            x.addView();
             Video_response_single buffer = new Video_response_single();
             buffer.creador_email = x.creador.email;
             buffer.creador_nombre = x.creador.nombre;
