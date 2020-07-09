@@ -74,4 +74,4 @@
 ### Diagramas de Gantt
 
 1. [Presentación Dev1.1](docs/presentation/gantttt.png)
-2. [Presentación Dev1.2](docs/presentation/gantt_dev1.2.jpeg)
+2. [Presentación Dev1.2](docs/presentation/gantt_dev1.2.JPG)
