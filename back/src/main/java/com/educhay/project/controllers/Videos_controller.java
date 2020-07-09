@@ -7,6 +7,7 @@ import com.educhay.project.repository.Unidad_repository;
 import com.educhay.project.repository.Usuarios_repository;
 import com.educhay.project.repository.Video_repository;
 import com.educhay.project.requests.*;
+import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -124,8 +125,11 @@ public class Videos_controller {
         if(my_vid_o.isPresent() && usuarioOptional.isPresent()){
             Video x = my_vid_o.get();
             Usuario usuario = usuarioOptional.get();
-            usuario.watch(x);
             x.addView();
+            usuario.watch(x);
+            video_repository.save(x);
+            usuarios_repository.save(usuario);
+
             Video_response_single buffer = new Video_response_single();
             buffer.creador_email = x.creador.email;
             buffer.creador_nombre = x.creador.nombre;
