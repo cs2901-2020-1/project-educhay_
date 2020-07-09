@@ -32,10 +32,11 @@ public class AmazonClient {
     private String endpointUrl;
     @Value("educhayvod-dev-input-gf3i00yl")
     private String bucketName;
-    @Value("AKIAXRZ2O7TSTA2IULLG")
+    @Value("AKIAXRZ2O7TSVJOKAQP7")
     private String accessKey;
-    @Value("")
+    @Value("GljPGSU8z03mnNBdwG+tGbjksXYOh7loY1hydmqj")
     private String secretKey;
+
 
     private Logger logger = LoggerFactory.getLogger(AmazonClient.class);
 

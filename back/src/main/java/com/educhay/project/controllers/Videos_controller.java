@@ -56,13 +56,13 @@ public class Videos_controller {
             Video vid = new Video(profe.get(),unidad.get(), video_request.url_stream, video_request.titulo, video_request.url_download,video_request.descripcion);
             List<Profesor> admins = new ArrayList<>();
             Iterable<Profesor> my_iterable= profesor_repository.findAll();
-            my_iterable.forEach(profesor -> {
-                if (profesor.is_admin){
-                    profesor.notifs.add(vid);
-                    profesor_repository.save(profesor);
-                }
-            });
-            //video_repository.save(vid);
+//            my_iterable.forEach(profesor -> {
+//                if (profesor.is_admin){
+//                    profesor.notifs.add(vid);
+//                    profesor_repository.save(profesor);
+//                }
+//            });
+            video_repository.save(vid);
             return new Register_response();
         }
 
@@ -116,7 +116,7 @@ public class Videos_controller {
     }
 
     @CrossOrigin
-    @GetMapping("/video")
+    @PostMapping("/video")
     @ResponseBody
     public Video_response_single videosById(@RequestBody Video_single_request video_single_request)
     {
