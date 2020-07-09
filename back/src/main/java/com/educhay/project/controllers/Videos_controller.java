@@ -129,6 +129,8 @@ public class Videos_controller {
             Usuario usuario = usuarioOptional.get();
             usuario.vids_vistos.add(x);
             x.views = x.views + 1;
+            usuarios_repository.save(usuario);
+            video_repository.save(x);
             Video_response_single buffer = new Video_response_single();
             buffer.creador_email = x.creador.email;
             buffer.creador_nombre = x.creador.nombre;
