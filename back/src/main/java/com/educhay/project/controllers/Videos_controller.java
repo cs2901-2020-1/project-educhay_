@@ -114,7 +114,53 @@ public class Videos_controller {
             return (video_list);
         }else throw new OrderNotFoundException();
     }
+    @CrossOrigin
+    @PutMapping
+    public Video_response_single updateVidId(@RequestBody Video_single_request video_single_request){
+        Long request_id = video_single_request.id;
+        String email = video_single_request.user_email;
+        Optional<Video> my_vid_o = video_repository.findById(request_id);
+        Optional<Usuario> usuarioOptional = usuarios_repository.findByEmail(email);
+        if(my_vid_o.isPresent() && usuarioOptional.isPresent()){
+            Video x = my_vid_o.get();
+            Usuario usuario = usuarioOptional.get();
+            usuario.vids_vistos.add(x);
+            x.views = x.views + 1;
+            usuarios_repository.save(usuario);
+            video_repository.save(x);
+            Video_response_single buffer = new Video_response_single();
+            buffer.creador_email = x.creador.email;
+            buffer.creador_nombre = x.creador.nombre;
+            buffer.creador_apellido = x.creador.apellido;
+            buffer.id = x.getId();
+            buffer.rating = x.rating;
+            buffer.titulo = x.titulo;
+            buffer.views = x.views;
+            buffer.url_download = x.url_download;
+            buffer.url_stream = x.url_stream;
+            buffer.descripcion = x.descripcion;
+            buffer.unidad = x.unidad.nombre;
+            buffer.curso = x.unidad.curso;
+            buffer.grado = x.unidad.grado;
+            ArrayList<Comment_response> responses = new ArrayList<Comment_response>();
+            for (Comentario comment:(x.comments)){
+                Comment_response tmp = new Comment_response();
+                tmp.video_id =x.getId();
+                tmp.content = comment.content;
+                tmp.fecha = comment.fecha;
+                tmp.comment_id = comment.getId();
+                tmp.email = comment.creador.email;
+                tmp.nombre = comment.creador.nombre;
+                tmp.apellido = comment.creador.apellido;
+                responses.add(tmp);
+            }
+            buffer.comments = responses;
+            return buffer;
 
+        }else {
+            throw new OrderNotFoundException();
+        }
+    }
     @CrossOrigin
     @PostMapping("/video")
     @ResponseBody
