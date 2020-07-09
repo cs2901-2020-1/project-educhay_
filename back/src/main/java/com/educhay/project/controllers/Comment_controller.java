@@ -49,7 +49,7 @@ public class Comment_controller {
         }
     }
     @CrossOrigin
-    @PutMapping("comments/delete")
+    @DeleteMapping("comments/delete")
     public Register_response deleteComment(@RequestBody Comment_delete comment_delete){
         Optional<Video> videoOptional = video_repository.findById(comment_delete.video_id);
         Optional<Usuario> usuarioOptional = usuarios_repository.findByEmail(comment_delete.creador_email);
@@ -57,7 +57,6 @@ public class Comment_controller {
             Video video = videoOptional.get();
             Usuario usuario = usuarioOptional.get();
             video.deleteComment(comment_delete.comment_id,usuario);
-            video_repository.save(video);
             return new Register_response();
         }
         else { throw new OrderNotFoundException(); }}}
