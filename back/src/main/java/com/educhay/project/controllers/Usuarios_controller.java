@@ -37,6 +37,7 @@ public class Usuarios_controller {
         return to_return;
     }
     @Transactional
+    @CrossOrigin
     @PutMapping("/register/profe")
     @ResponseBody
     public Register_response registerProfe(@RequestBody Register_form register_form) throws CloneNotSupportedException{
@@ -49,10 +50,6 @@ public class Usuarios_controller {
             return new Register_response();
         }
     }
-
-
-
-
     @CrossOrigin
     @PostMapping("/register")
     @ResponseBody
