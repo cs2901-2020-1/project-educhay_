@@ -38,7 +38,19 @@ public class Usuarios_controller {
     }
     @Transactional
     @CrossOrigin
-    @PutMapping("/register/profe")
+    @PutMapping("/upgrade/")
+    @ResponseBody public Register_response upgradeProfe(String email){
+        Optional<Profesor> optionalProfesor = ProfeRepo.findByEmail(email);
+        if (optionalProfesor.isPresent()){
+            Profesor profesor = optionalProfesor.get();
+            profesor.is_admin = true;
+            return new Register_response();
+        }else throw new OrderNotFoundException();
+    }
+
+    @Transactional
+    @CrossOrigin
+    @PostMapping("/register/profe")
     @ResponseBody
     public Register_response registerProfe(@RequestBody Register_form register_form) throws CloneNotSupportedException{
         Optional<Profesor> optionalProfesor = ProfeRepo.findByEmail(register_form.email);
