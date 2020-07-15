@@ -8,14 +8,17 @@ import com.educhay.project.requests.Video_response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin
 @RestController
 public class Notif_controller {
+
     @Autowired
     Profesor_repository profesor_repository;
+    @Transactional
     @PostMapping("/notif/{email}")
     @ResponseBody
     public Videos_controller.Video_list notifs(@PathVariable(value = "email") String my_email){

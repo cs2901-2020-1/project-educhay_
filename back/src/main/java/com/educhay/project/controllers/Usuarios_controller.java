@@ -10,12 +10,14 @@ import com.educhay.project.requests.Login_request;
 import com.educhay.project.requests.Login_response;
 import com.educhay.project.requests.Register_form;
 import com.educhay.project.requests.Register_response;
+import org.apache.tomcat.jni.Error;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 import java.util.PropertyPermission;
 @CrossOrigin
@@ -34,11 +36,27 @@ public class Usuarios_controller {
         String to_return = "Hola Mundo!";
         return to_return;
     }
+    @Transactional
+    @PutMapping("/register/profe")
+    @ResponseBody
+    public Register_response registerProfe(@RequestBody Register_form register_form) throws CloneNotSupportedException{
+        Optional<Profesor> optionalProfesor = ProfeRepo.findByEmail(register_form.email);
+        Optional<Usuario> optionalUsuario = UserRepo.findByEmail(register_form.email);
+        if (optionalProfesor.isPresent() || optionalUsuario.isPresent()){throw new CloneNotSupportedException();}
+        else {
+            Profesor profesor = new Profesor(register_form.password, register_form.nombre,register_form.apellido,register_form.email);
+            ProfeRepo.save(profesor);
+            return new Register_response();
+        }
+    }
+
+
+
 
     @CrossOrigin
     @PostMapping("/register")
     @ResponseBody
-    public Register_response register(@RequestBody Register_form register_form) {
+    public Register_response register(@RequestBody Register_form register_form) throws CloneNotSupportedException {
         //String username, String password, String nombre , String apellido, String email
 
         Optional<Usuario> u_email_validacion = UserRepo.findByEmail(register_form.email);
@@ -47,14 +65,9 @@ public class Usuarios_controller {
 
         if (u_email_validacion.isPresent() || p_email_validacion.isPresent() ) {
             Register_response toReturn = new Register_response();
-            toReturn.confirmation = false;
+            throw new CloneNotSupportedException();
         }
-
-        if (register_form.email.equals("profe@utec.edu.pe")) {
-            Profesor new_profe = new Profesor(register_form.password, register_form.nombre, register_form.apellido, register_form.email);
-            ProfeRepo.save(new_profe);
-            logger.error("profe saved");
-        } else {
+        else {
             Usuario new_usr = new Usuario(register_form.password, register_form.nombre, register_form.apellido, register_form.email);
             UserRepo.save(new_usr);
             logger.error("no deberia entrar");
