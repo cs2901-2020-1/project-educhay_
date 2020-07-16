@@ -13,9 +13,9 @@ public class Profesor extends Usuario {
     //TODO
     public Boolean is_admin;
     //TODO: hacer todo con is_admin , borrar cuentas o subir a profe
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     public List<Video> videos;
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     public List<Video> notifs;
     public Profesor(){};
     public List<Video>verNotifs(){
@@ -35,13 +35,14 @@ public class Profesor extends Usuario {
         //TODO:Make api remove from usuario repo after this
 
     }
-    public Profesor( String _password, String _nombre, String _apellido, String _email) {
+    public Profesor( String _password, String _nombre, String _apellido, String _email,Boolean _is_admin, Boolean _is_super) {
 
         password = _password;
         nombre = _nombre;
         apellido = _apellido;
         email = _email;
-        is_admin = true;
+        is_admin = _is_admin;
+        is_SUPER_admin = _is_super;
         videos =  new ArrayList<Video>();
         notifs = new ArrayList<Video>();
     }

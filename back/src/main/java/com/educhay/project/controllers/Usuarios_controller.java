@@ -57,7 +57,7 @@ public class Usuarios_controller {
         Optional<Usuario> optionalUsuario = UserRepo.findByEmail(register_form.email);
         if (optionalProfesor.isPresent() || optionalUsuario.isPresent()){throw new CloneNotSupportedException();}
         else {
-            Profesor profesor = new Profesor(register_form.password, register_form.nombre,register_form.apellido,register_form.email);
+            Profesor profesor = new Profesor(register_form.password, register_form.nombre,register_form.apellido,register_form.email,false,false);
             ProfeRepo.save(profesor);
             return new Register_response();
         }

@@ -48,7 +48,7 @@ public class Videos_controller {
         }
         return return_list;
     }
-    @Transactional
+
     @CrossOrigin
     @PostMapping("/videos/POST")
     public Register_response insertVideo(@RequestBody Video_request video_request){
@@ -57,15 +57,20 @@ public class Videos_controller {
         if (!profe.isPresent() || !unidad.isPresent()){throw new OrderNotFoundException();}
         else {
             Video vid = new Video(profe.get(),unidad.get(), video_request.url_stream, video_request.titulo, video_request.url_download,video_request.descripcion);
-            List<Profesor> admins = new ArrayList<>();
+            Profesor profesor_a = profe.get();
+            logger.error("primer add");
+            video_repository.save(vid);
+            logger.error("segundo add");
+            profesor_a.videos.add(vid);
             Iterable<Profesor> my_iterable= profesor_repository.findAll();
             my_iterable.forEach(profesor -> {
                 if (profesor.is_admin){
-                    profesor.notifs.add(vid);
-                    profesor_repository.save(profesor);
+                   logger.error("tercer add");
+                     profesor.notifs.add(vid);
+                     profesor_repository.save(profesor);
                 }
             });
-            video_repository.save(vid);
+
             return new Register_response();
         }
 
