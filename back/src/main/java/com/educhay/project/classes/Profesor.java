@@ -1,6 +1,7 @@
 package com.educhay.project.classes;
 
 import com.educhay.project.repository.Video_repository;
+import com.educhay.project.requests.Notif_response;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,15 +14,19 @@ public class Profesor extends Usuario {
     //TODO
     public Boolean is_admin;
     //TODO: hacer todo con is_admin , borrar cuentas o subir a profe
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     public List<Video> videos;
-    @ManyToMany
-    public List<Video> notifs;
+    @OneToMany(cascade = CascadeType.ALL)
+    public List<Notif> notifs;
     public Profesor(){};
-    public List<Video>verNotifs(){
-        List<Video> to_re = notifs;
-        notifs = new ArrayList<Video>();
-        return to_re;
+    public List<Notif_response>verNotifs(){
+        List<Notif_response> notifList = new ArrayList<>();
+        for (Notif notif: notifs){
+            Notif_response buffer= notif.encapsulate();
+            notif.read = true;
+            notifList.add(buffer);
+        }
+        return notifList;
     }
     public Profesor(Usuario usuario){
         apellido = usuario.apellido;
@@ -30,7 +35,7 @@ public class Profesor extends Usuario {
         apellido = usuario.apellido;
         password = usuario.password;
         is_admin = false;
-        notifs = new ArrayList<Video>();
+        notifs = new ArrayList<Notif>();
         videos =  new ArrayList<Video>();
         //TODO:Make api remove from usuario repo after this
 
@@ -44,7 +49,12 @@ public class Profesor extends Usuario {
         is_admin = _is_admin;
         is_SUPER_admin = _is_super;
         videos =  new ArrayList<Video>();
-        notifs = new ArrayList<Video>();
+        notifs = new ArrayList<Notif>();
+    }
+    public boolean addVideoToNotifs(Video _video){
+        Notif notif = new Notif(this, _video);
+        notifs.add(notif);
+        return true;
     }
 
     public boolean addVideoToProfesor(Video _video) {

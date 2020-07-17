@@ -22,7 +22,6 @@ public class Video {
     public Profesor creador;
     public Float rating;
     @OneToOne(cascade = CascadeType.ALL)
-
     public Unidad unidad;
 
     public String url_stream;
@@ -35,6 +34,7 @@ public class Video {
     //comments are to be loaded by video id
     @OneToMany(cascade = CascadeType.ALL)
     List<Rating> ratings;
+
 
 
     public boolean rate(Usuario _usuario, int _rating) {

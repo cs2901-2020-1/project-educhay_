@@ -61,16 +61,15 @@ public class Videos_controller {
             logger.error("primer add");
             video_repository.save(vid);
             logger.error("segundo add");
-            profesor_a.videos.add(vid);
+            profesor_a.addVideoToProfesor(vid);
             Iterable<Profesor> my_iterable= profesor_repository.findAll();
             my_iterable.forEach(profesor -> {
                 if (profesor.is_admin){
-                   logger.error("tercer add");
-                     profesor.notifs.add(vid);
-                     profesor_repository.save(profesor);
+                    logger.error("tercer add");
+                    profesor.addVideoToNotifs(vid);
+                    profesor_repository.save(profesor);
                 }
             });
-
             return new Register_response();
         }
 
