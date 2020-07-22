@@ -48,6 +48,13 @@ public class Videos_controller {
         }
         return return_list;
     }
+    public List<VidVisto_response> vidEncode(List <VidVisto> videos){
+        List<VidVisto_response> toReturn = new ArrayList<>();
+        for (VidVisto visto:videos){
+            toReturn.add(visto.encapsulate());
+        }
+        return toReturn;
+    }
 
     @CrossOrigin
     @PostMapping("/videos/POST")
@@ -111,14 +118,13 @@ public class Videos_controller {
     @CrossOrigin
     @GetMapping("/videos/historicos/{email}")
     @ResponseBody
-    public Video_list videosHistoricos(@PathVariable(value = "email")String email)
+    public List<VidVisto_response> videosHistoricos(@PathVariable(value = "email")String email)
     {
         Optional<Usuario> optionalUsuario =usuarios_repository.findByEmail(email);
         if (optionalUsuario.isPresent()){
             Usuario usuario = optionalUsuario.get();
-            List<Video> videos = usuario.vids_vistos;
-            Video_list video_list = listEncode(videos);
-            return (video_list);
+            List<VidVisto> videos = usuario.vids_vistos;
+            return vidEncode(videos);
         }else throw new OrderNotFoundException();
     }
     @CrossOrigin

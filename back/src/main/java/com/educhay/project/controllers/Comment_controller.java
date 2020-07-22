@@ -1,5 +1,6 @@
 package com.educhay.project.controllers;
 
+import com.educhay.project.classes.Comentario;
 import com.educhay.project.classes.Usuario;
 import com.educhay.project.classes.Video;
 import com.educhay.project.errores.OrderNotFoundException;
@@ -17,6 +18,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
+import javax.xml.stream.events.Comment;
 import java.util.Optional;
 @CrossOrigin
 @RestController
@@ -48,16 +51,21 @@ public class Comment_controller {
             throw new OrderNotFoundException();
         }
     }
+    @Transactional
     @CrossOrigin
     @DeleteMapping("comments/delete")
-    public Register_response deleteComment(@RequestBody Comment_delete comment_delete){
+    public boolean deleteComment(@RequestBody Comment_delete comment_delete){
         Optional<Video> videoOptional = video_repository.findById(comment_delete.video_id);
         Optional<Usuario> usuarioOptional = usuarios_repository.findByEmail(comment_delete.creador_email);
         if(videoOptional.isPresent() &&  usuarioOptional.isPresent()){
             Video video = videoOptional.get();
             Usuario usuario = usuarioOptional.get();
-            video.deleteComment(comment_delete.comment_id,usuario);
-            return new Register_response();
+            logger.error(String.valueOf(comment_delete.comment_id));
+            for (Comentario c: video.comments) {
+                logger.error(String.valueOf(c.getId()));
+            }
+            return video.deleteComment(comment_delete.comment_id,usuario);
+
         }
         else { throw new OrderNotFoundException(); }}}
 
