@@ -25,6 +25,7 @@ public class Notif {
         notif_response.profesor_email = profesor.email;
         notif_response.read = read;
         notif_response.video_id = video.getId();
+        notif_response.video_nombre=video.titulo;
         return notif_response;
     }
 }
