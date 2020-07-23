@@ -7,5 +7,5 @@ public class Video_response {
     public String creador_email, titulo, url_stream, url_download;
     public Float rating;
     public String Unidad;
-
+    public String descripcion;
 }

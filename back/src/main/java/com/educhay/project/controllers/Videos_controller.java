@@ -42,6 +42,7 @@ public class Videos_controller {
             buffer.rating = x.rating;
             buffer.titulo = x.titulo;
             buffer.Unidad = x.unidad.nombre;
+            buffer.descripcion = x.descripcion;
             buffer.url_download = x.url_download;
             buffer.url_stream = x.url_stream;
             return_list.add(buffer);
